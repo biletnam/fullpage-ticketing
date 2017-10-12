@@ -39,9 +39,9 @@
         	<div class="slide" data-anchor="ticketSelection">
             <div id="step2" class="content">
               <input type="text" class="wide ticketOrder" id="name-ticket1" name="tickets[]" disabled><button type="button" class="removeTicketButton">-</button><br>
-              <button type="button" id="addticketbutton" class="wide">Weiteres Ticket hinzufügen</button><br>
+              <button type="button" id="addticketbutton" class="wide">Ticket hinzufügen</button><br>
               <button type="button" class="small left backbutton">Zurück</button>
-              <button type="button" class="small right createReviewPage nextbutton">Weiter</button>
+              <button type="button" id="createReviewPage" class="small right nextbutton">Weiter</button>
             </div>
           </div>
 

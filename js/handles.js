@@ -8,25 +8,11 @@ $(document).ready(function() {
   /** Creates the review page
   */
   $("#createReviewPage").click(function() {
-    //$("#reviewTable").prepend("<tr><td>"++"</td></tr>");
-    $("ticketOrder").each(function () {
-      alert($(this).val());
+    $("#reviewTable").empty();
+    $(".ticketOrder").each(function () {
+      $("#reviewTable").prepend("<tr><td>"+$(this).val()+"</td></tr>");
     });
   });
-/*
-  $("ticketOrder").each(function () {
-
-      $('td', this).each(function () {
-          var value = $(this).find(":input").val();
-          var values = 100 - value + ', ' + value;
-
-          if (value > 0) {
-              $(this).append(htmlPre + values + htmlPost);
-          }
-       })
-
-  })
-*/
 
   /** Button to continue the order process
   */
