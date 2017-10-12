@@ -4,6 +4,22 @@
   margin: 0 auto;
 }
 
-td {
+table {
+  width: 100%;
+}
+
+tr {
   border-bottom: 1px solid black;
+}
+
+td {
+  white-space: pre;
+}
+
+.reviewName {
+  float: left;
+}
+
+.reviewPrice {
+  float: right;
 }

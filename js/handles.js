@@ -10,7 +10,7 @@ $(document).ready(function() {
   $("#createReviewPage").click(function() {
     $("#reviewTable").empty();
     $(".ticketOrder").each(function () {
-      $("#reviewTable").prepend("<tr><td>"+$(this).val()+"</td></tr>");
+      $("#reviewTable").prepend("<tr><td class='reviewName'>"+$(this).val()+"<br>Early-Bird Ticket</td><td class='reviewPrice'>€20.00</td></tr>");
     });
   });
 
