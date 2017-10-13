@@ -24,7 +24,7 @@
 
     	<div class="section">
 
-        <form action="/order_review.php">
+        <form action="/admin_review.php">
 
 
           <div class="slide" data-anchor="customerData">
