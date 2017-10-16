@@ -10,9 +10,9 @@ $(document).ready(function() {
   $("#createReviewPage").click(function() {
     $("#reviewTable").empty();
     $(".ticketOrder").each(function () {
-      var uid = $(this).next().val();/*hardcoded for 2 digit prices*/
-      var displayPrice = uid.substring(uid.length-2, uid.length);
-      var priceClass = uid.substring(uid.length-3, uid.length-2);
+      var uid = $(this).next().val();/*hardcoded for 4 digit prices*/
+      var displayPrice = uid.substring(uid.length-4, uid.length);
+      var priceClass = uid.substring(uid.length-5, uid.length-4);
       $("#reviewTable").prepend("<tr><td class='reviewName'>"+$(this).val()+"<br>"+priceClass+"</td><td class='reviewPrice'>€"+displayPrice+"<br>"+uid+"</td></tr>");
     });
   });
@@ -30,8 +30,10 @@ $(document).ready(function() {
   */
   var tickets = 1;
   $("#addticketbutton").click(function() {
-    tickets++;
-    $(this).before('<input type="text" class="wide ticketOrder" id="name-ticket'+ tickets +'" name="tickets[owner][]" placeholder="z.B. Max Mustermann"><input type="hidden" name="tickets[uids][]" value="88fasodfho72as7asd2asdoier120"><button type="button" class="removeTicketButton">-</button><br>');
+    $.getJSON("ticket_reservation.php?cart", function(ticket) {
+      tickets++;
+      $("#addticketbutton").before('<input type="text" class="wide ticketOrder" id="name-ticket'+ tickets +'" name="tickets[owner][]" placeholder="z.B. Max Mustermann"><input type="hidden" name="tickets[uids][]" value="'+ticket.uid+'"><button type="button" class="removeTicketButton">-</button><br>');
+    });
   });
 
   /** Button to remove a ticket

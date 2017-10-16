@@ -16,7 +16,7 @@
       }
       //////add ticket to cart
       ////generate uid
-      $uid = md5($row['stage'].$row['price'].rand().$row['price'].microtime()).$row['price'];
+      $uid = md5($row['stage'].$row['price'].rand().$row['price'].microtime()).$row['stage'].$row['price'];
 
       $sql = "INSERT INTO carted (uid, price) VALUES ('".$uid."', '".$row['price']."')";
       if(!$result = $db->query($sql)){
