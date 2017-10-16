@@ -31,7 +31,7 @@ $(document).ready(function() {
   var tickets = 1;
   $("#addticketbutton").click(function() {
     tickets++;
-    $(this).before('<input type="text" class="wide ticketOrder" id="name-ticket'+ tickets +'" name="tickets[]" placeholder="z.B. Max Mustermann"><input type="hidden" name="tickets[uids][]" value="88fasodfho72as7asd2asdoier120"><button type="button" class="removeTicketButton">-</button><br>');
+    $(this).before('<input type="text" class="wide ticketOrder" id="name-ticket'+ tickets +'" name="tickets[owner][]" placeholder="z.B. Max Mustermann"><input type="hidden" name="tickets[uids][]" value="88fasodfho72as7asd2asdoier120"><button type="button" class="removeTicketButton">-</button><br>');
   });
 
   /** Button to remove a ticket
