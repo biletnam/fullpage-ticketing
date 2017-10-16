@@ -18,13 +18,29 @@
       ////generate uid
       $uid = md5($row['stage'].$row['price'].rand().$row['price'].microtime()).$row['stage'].$row['price'];
 
-      $sql = "INSERT INTO carted (uid, price) VALUES ('".$uid."', '".$row['price']."')";
+      $sql = "INSERT INTO carted (uid, stage, price) VALUES ('".$uid."', ".$row['stage'].", '".$row['price']."')";
       if(!$result = $db->query($sql)){
         die('There was an error running the insert query [' . $db->error . ']');
       }
 
       //todo: return uid and price as JSON
       echo "{\"uid\":\"".$uid."\", \"price\":".$row['price'].", \"stage\":{\"id\":".$row['stage'].", \"name\":\"".$row['name']."\"}}";
+    } else if (isset($_GET['remove'])) {
+      //$uid = $db->mysqli_real_escape_string($_GET['remove']);
+      $uid  = $db->real_escape_string(htmlspecialchars($_GET['remove']));
+
+      ///////get price class of returned card
+      $sql = "SELECT carted.stage FROM carted WHERE carted.uid = '".$uid."'";
+
+      $row = $db->query($sql)->fetch_assoc();
+
+      //////delete reservation
+      $sql = "DELETE FROM carted WHERE carted.uid = '".$uid."'";
+      $row = $db->query($sql);
+
+      //////make this ticket reavaible
+      $sql = "UPDATE pricing SET pricing.left = pricing.left + 1 WHERE stage = ".$row['stage'];
+      $result = $db->query($sql);
     }
   }
  ?>
