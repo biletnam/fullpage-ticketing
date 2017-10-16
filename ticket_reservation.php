@@ -52,7 +52,7 @@
         $success = false;
       }
 
-      echo "{\"success\":\"".$success"\"}";
+      echo "{\"success\":\"".$success."\"}";
 
     }
   }
