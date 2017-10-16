@@ -43,10 +43,15 @@ $.getJSON("ticket_reservation.php?cart", function(ticket) {
   /** Button to remove a ticket
   */
   $("#step2").on("click", ".removeTicketButton", function() {
-    tickets--;
-    $(this).prev().remove(); //owner
-    $(this).prev().remove(); //uid
-    $(this).next().remove(); //br
-    $(this).remove(); //this
+    var button = $(this);
+    var uid = button.prev().val();
+
+    $.getJSON("ticket_reservation.php?remove="+uid, function(ticket) {
+      tickets--;
+      button.prev().remove(); //uid
+      button.prev().remove(); //owner
+      button.next().remove(); //br
+      button.remove(); //this
+    });
   });
 });
