@@ -16,7 +16,7 @@
       }
       //////add ticket to cart
       ////generate uid
-      $uid = md5($row['stage'].$row['price'].time()).$row['price'];
+      $uid = md5($row['stage'].rand().$row['price'].microtime()).$row['price'];
 
       $sql = "INSERT INTO carted (uid, price) VALUES ('".$uid."', '".$row['price']."')";
       if(!$result = $db->query($sql)){
@@ -25,7 +25,8 @@
 
       //todo: return uid and price as JSON
       echo "{\"uid\":\"".$uid."\", \"price\":".$row['price']."}";
-
-    }
+    } /*else if(isset($_GET['uncart']) {
+      $uid = $db->mysqli_real_escape_string(htmlspecialchars($_GET['uncart']));
+    } */
   }
  ?>
