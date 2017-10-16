@@ -1,4 +1,8 @@
 $(document).ready(function() {
+//generate uid for first ticket
+$.getJSON("ticket_reservation.php?cart", function(ticket) {
+  $("#name-ticket1").next().val(ticket.uid);
+});
   /** Names the first ticket after the orderer
   */
   $("#createFirstTicket").click(function() {
