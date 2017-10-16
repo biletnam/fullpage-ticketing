@@ -4,7 +4,7 @@
   if($_SERVER['REQUEST_METHOD'] ==  "GET") {
     if(isset($_GET['cart'])) {
       //////get cheapest possible price
-      $sql = "SELECT pricing.stage,pricing.price FROM pricing WHERE (expiration >= NOW()) AND ((pricing.left > 0) OR (pricing.left IS NULL)) ORDER BY pricing.priority LIMIT 1";
+      $sql = "SELECT pricing.stage,pricing.name,pricing.price FROM pricing WHERE (expiration >= NOW()) AND ((pricing.left > 0) OR (pricing.left IS NULL)) ORDER BY pricing.priority LIMIT 1";
       $row = $db->query($sql)->fetch_assoc();
       //echo $row['stage']."-€".$row['price'];
 
@@ -24,7 +24,7 @@
       }
 
       //todo: return uid and price as JSON
-      echo "{\"uid\":\"".$uid."\", \"price\":".$row['price']."}";
+      echo "{\"uid\":\"".$uid."\", \"price\":".$row['price'].", \"stage\":{\"id\":".$row['stage'].", \"name\":\"".$row['name']."\"}}";
     }
   }
  ?>
