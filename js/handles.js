@@ -36,7 +36,7 @@ $.getJSON("ticket_reservation.php?cart", function(ticket) {
   $("#addticketbutton").click(function() {
     $.getJSON("ticket_reservation.php?cart", function(ticket) {
       tickets++;
-      $("#addticketbutton").before('<input type="text" class="wide ticketOrder" id="name-ticket'+ tickets +'" name="tickets[owner][]" placeholder="z.B. Max Mustermann"><input type="hidden" name="tickets[uids][]" value="'+ticket.uid+'"><button type="button" class="removeTicketButton">-</button><br>');
+      $("#addticketbutton").before('<input required type="text" class="wide ticketOrder" id="name-ticket'+ tickets +'" name="tickets[owner][]" placeholder="z.B. Max Mustermann"><input type="hidden" name="tickets[uids][]" value="'+ticket.uid+'"><button type="button" class="removeTicketButton">-</button><br>');
     });
   });
 
