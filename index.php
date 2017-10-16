@@ -29,7 +29,7 @@
 
           <div class="slide" data-anchor="customerData">
             <div id="step1" class="content">
-              <input required autofocus type="text" class="trelevant small left" id="input-firstname" name="firstname" placeholder="Vorname">
+              <input required type="text" class="trelevant small left" id="input-firstname" name="firstname" placeholder="Vorname">
               <input required type="text" class="trelevant small right" id="input-surname" name="surname" placeholder="Nachname"><br>
               <input required type="email" class="wide" id="input-email" name="email" placeholder="E-Mail Adresse"><br>
               <input required type="tel" class="wide" id="input-mobile" name="mobile" autocomplete="tel" placeholder="Handynummer (für weitere Fragen)"><br>
