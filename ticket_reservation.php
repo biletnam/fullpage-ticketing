@@ -2,6 +2,7 @@
   include "db.php";
 
   if($_SERVER['REQUEST_METHOD'] ==  "GET") {
+
     if(isset($_GET['cart'])) {
       //////get cheapest possible price
       $sql = "SELECT pricing.stage,pricing.name,pricing.price FROM pricing WHERE (pricing.expiration >= NOW()) AND ((pricing.left > 0) OR (pricing.left IS NULL)) ORDER BY pricing.priority LIMIT 1";
@@ -25,31 +26,36 @@
 
       echo "{\"uid\":\"".$uid."\", \"price\":".$row['price'].", \"stage\":{\"id\":".$row['stage'].", \"name\":\"".$row['name']."\"}}";
     } else if (isset($_GET['remove'])) {
-      $uid  = $db->real_escape_string(htmlspecialchars($_GET['remove']));
+      $uidstring  = $db->real_escape_string(htmlspecialchars($_GET['remove']));
+
+      $uids = explode("-", $uidstring);
 
       $success = true;
 
-      ///////get price class of returned card
-      $sql = "SELECT carted.stage FROM carted WHERE carted.uid = '".$uid."'";
+      foreach($uids as $uid) {
 
-      if(!$result = $db->query($sql)){
-        $success = false;
-      }
+        ///////get price class of returned card
+        $sql = "SELECT carted.stage FROM carted WHERE carted.uid = '".$uid."'";
 
-      $row = $result->fetch_assoc();
+        if(!$result = $db->query($sql)){
+          $success = false;
+        }
 
-      //////delete reservation
-      $sql = "DELETE FROM carted WHERE carted.uid = '".$uid."'";
+        $row = $result->fetch_assoc();
 
-      if(!$result = $db->query($sql)){
-        $success = false;
-      }
+        //////delete reservation
+        $sql = "DELETE FROM carted WHERE carted.uid = '".$uid."'";
 
-      //////make this ticket reavaible
-      $sql = "UPDATE pricing SET pricing.left = pricing.left + 1 WHERE pricing.stage = ".$row['stage'];
+        if(!$result = $db->query($sql)){
+          $success = false;
+        }
 
-      if(!$result = $db->query($sql)){
-        $success = false;
+        //////make this ticket reavaible
+        $sql = "UPDATE pricing SET pricing.left = pricing.left + 1 WHERE pricing.stage = ".$row['stage'];
+
+        if(!$result = $db->query($sql)){
+          $success = false;
+        }
       }
 
       echo "{\"success\":\"".($success?"true":"false")."\"}";

@@ -60,3 +60,15 @@ $(document).ready(function() {
     });
   });
 });
+
+$(window).bind('beforeunload', function(){
+  $(".ticketOrder").each(function () {
+    var uid = $(this).next().val();
+    //double code, could just make a funcition
+    $.getJSON("ticket_reservation.php?remove="+uid, function(ticket) {
+      tickets--;
+    });
+  });
+
+  return undefined;
+});
