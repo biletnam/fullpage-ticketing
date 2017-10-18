@@ -1,12 +1,17 @@
 $(document).ready(function() {
-//generate uid for first ticket
-$.getJSON("ticket_reservation.php?cart", function(ticket) {
-  $("#name-ticket1").next().val(ticket.uid);
-});
-  /** Names the first ticket after the orderer
+
+  /** creates first ticket
   */
+  var createFirstTicketButtonClicked = false;
   $("#createFirstTicket").click(function() {
     $("#name-ticket1").val($("#input-firstname").val() + " " + $("#input-surname").val());
+    if(!createFirstTicketButtonClicked) {
+      //generate uid for first ticket
+      $.getJSON("ticket_reservation.php?cart", function(ticket) {
+        $("#name-ticket1").next().val(ticket.uid);
+        createFirstTicketButtonClicked = true;
+      });
+    }
   });
 
   /** Creates the review page
