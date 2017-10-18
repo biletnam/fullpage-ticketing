@@ -10,7 +10,7 @@
       //echo $row['stage']."-€".$row['price'];
 
       //////decrease number of avaible tickets
-      $sql = "UPDATE pricing SET pricing.left = pricing.left - 1 WHERE pricing.stage = ".$row['stage']." AND stage > 0";
+      $sql = "UPDATE pricing SET pricing.left = IFNULL((pricing.left - 1), NULL) WHERE pricing.stage = ".$row['stage']." AND stage > 0";
 
       if(!$result = $db->query($sql)){
         die('There was an error running the update query [' . $db->error . ']');
@@ -51,7 +51,7 @@
         }
 
         //////make this ticket reavaible
-        $sql = "UPDATE pricing SET pricing.left = pricing.left + 1 WHERE pricing.stage = ".$row['stage'];
+        $sql = "UPDATE pricing SET pricing.left = IFNULL((pricing.left + 1), NULL) WHERE pricing.stage = ".$row['stage'];
 
         if(!$result = $db->query($sql)){
           $success = false;

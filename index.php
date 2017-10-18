@@ -5,7 +5,7 @@ $sql = "SELECT carted.id, carted.stage FROM carted WHERE (NOW() - INTERVAL 30 MI
 
 while($row = $db->query($sql)->fetch_assoc()){
     //echo $row['id'];
-    $sql2 = "UPDATE pricing SET pricing.left = pricing.left + 1 WHERE pricing.stage = ".$row['stage'];
+    $sql2 = "UPDATE pricing SET pricing.left = IFNULL((pricing.left + 1), NULL) WHERE pricing.stage = ".$row['stage'];
     $sql3 = "DELETE FROM carted WHERE carted.id = ".$row['id'];
     $db->query($sql2);
     $db->query($sql3);
