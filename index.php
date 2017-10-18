@@ -42,6 +42,7 @@ $db->query($sql);
               <input required type="email" class="wide" id="input-email" name="email" placeholder="E-Mail Adresse"><br>
               <input required type="tel" class="wide" id="input-mobile" name="mobile" autocomplete="tel" placeholder="Handynummer (für weitere Fragen)"><br>
               <button type="button" id="createFirstTicket" class="small right nextbutton">Weiter</button>
+              <br>wenn du mehr als 30 minuten brauchst, bist du am arsch
             </div>
           </div>
 
