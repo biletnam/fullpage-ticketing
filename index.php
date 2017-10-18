@@ -39,9 +39,9 @@
 
         	<div class="slide" data-anchor="ticketSelection">
             <div id="step2" class="content">
-              <input type="text" class="wide ticketOrder" id="name-ticket1" name="tickets[owner][]" readonly><input type="hidden" name="tickets[uids][]" value="null"><button type="button" class="removeTicketButton">-</button><br>
+              <input type="text" class="wide ticketOrder" id="name-ticket1" name="tickets[owner][]" readonly><input type="hidden" name="tickets[uids][]" value="null"><button tabindex="-1" type="button" class="removeTicketButton">-</button><br>
               <button type="button" id="addticketbutton" class="wide">Ticket hinzufügen</button><br>
-              <button type="button" class="small left backbutton">Zurück</button>
+              <button tabindex="-1" type="button" class="small left backbutton">Zurück</button>
               <button type="button" id="createReviewPage" class="small right nextbutton">Weiter</button>
             </div>
           </div>
@@ -50,7 +50,7 @@
             <div id="step3" class="content">
               <table id="reviewTable">
               </table>
-              <button type="button" class="small left backbutton">Zurück</button>
+              <button tabindex="-1" type="button" class="small left backbutton">Zurück</button>
               <input type="submit" class="small right" value="Abschicken">
             </div>
           </div>
