@@ -1,3 +1,11 @@
+<?php
+include "db.php";
+
+$sql = "DELETE FROM carted WHERE (NOW() - INTERVAL 30 MINUTE) > carted.time_carted";
+
+$db->query($sql);
+
+?>
 <!DOCTYPE html>
 <html>
   <head>
