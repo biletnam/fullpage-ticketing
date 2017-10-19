@@ -23,7 +23,7 @@ $(document).ready(function() {
     $(".ticketOrder").each(function () {
       var uid = $(this).next().val();
       var thisThing = $(this);
-      
+
       //deprecated but had no better idea at the time
       $.ajax({
         dataType: "json",
@@ -46,7 +46,21 @@ $(document).ready(function() {
     $.fn.fullpage.moveSlideLeft();
   });
   $(".nextbutton").click(function() {
-    $.fn.fullpage.moveSlideRight();
+    var pageValid = true;
+
+    $(this).parent().children("input").each(function() {
+      if(!$(this)[0].checkValidity()) {
+        pageValid = false;
+      }
+    });
+
+    if(pageValid) {
+      $.fn.fullpage.moveSlideRight();
+    } else {
+      // If the form is invalid, submit it. The form won't actually submit;
+      // this will just cause the browser to display the native HTML5 error messages.
+      $("form").find(":submit").click();
+    }
   });
 
   /** Button to add a ticket

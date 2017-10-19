@@ -42,10 +42,10 @@ while($row = $db->query($sql)->fetch_assoc()){
 
           <div class="slide" data-anchor="customerData">
             <div id="step1" class="content">
-              <input required type="text" class="trelevant small left" id="input-firstname" name="firstname" placeholder="Vorname">
-              <input required type="text" class="trelevant small right" id="input-surname" name="surname" placeholder="Nachname"><br>
-              <input required type="email" class="wide" id="input-email" name="email" placeholder="E-Mail Adresse"><br>
-              <input required type="tel" class="wide" id="input-mobile" name="mobile" autocomplete="tel" placeholder="Handynummer (für weitere Fragen)"><br>
+              <input required type="text" class="trelevant small left" id="input-firstname" title="Vorname" name="firstname" placeholder="Vorname">
+              <input required type="text" class="trelevant small right" id="input-surname" title="Nachname" name="surname" placeholder="Nachname"><br>
+              <input required type="email" class="wide" id="input-email" name="email" title="E-Mail Adresse" placeholder="E-Mail Adresse"><br>
+              <input required type="tel" pattern="[0-9]*\/*(\+49)*[ ]*(\([0-9]+\))*([ ]*(-|–)*[ ]*[0-9]+)*" title="Handynummer" class="wide" id="input-mobile" name="mobile" autocomplete="tel" placeholder="Handynummer (für weitere Fragen)"><br>
               <button type="button" id="createFirstTicket" class="small right nextbutton">Weiter</button>
               <br>wenn du mehr als 30 minuten brauchst, bist du am arsch
             </div>
