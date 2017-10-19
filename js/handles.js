@@ -18,12 +18,26 @@ $(document).ready(function() {
   */
   $("#createReviewPage").click(function() {
     $("#reviewTable").empty();
+    var totalPrice = 0;
+    var content = "";
     $(".ticketOrder").each(function () {
-      var uid = $(this).next().val();/*hardcoded for 4 digit prices*/
-      var displayPrice = uid.substring(uid.length-4, uid.length);
-      var priceClass = uid.substring(uid.length-5, uid.length-4);
-      $("#reviewTable").prepend("<tr><td class='reviewName'>"+$(this).val()+"<br>"+priceClass+"</td><td class='reviewPrice'>€"+displayPrice+"<br>"+uid+"</td></tr>");
+      var uid = $(this).next().val();
+      var thisThing = $(this);
+      
+      //deprecated but had no better idea at the time
+      $.ajax({
+        dataType: "json",
+        async: false,
+        url: "cart_info.php?uid="+uid,
+        success: function(ticket) {
+          totalPrice += Number(ticket.price)/100;
+          content += "<tr><td class='reviewName'>"+thisThing.val()+"<br>"+ticket.stage.name+"</td><td class='reviewPrice'>€"+ticket.price/100+"<br>"+uid+"</td></tr>";
+        }
+      });
+
     });
+    content += "<tr class='totalRow'><td class='reviewName totalName'>Gesamt</td><td class='totalPrice reviewPrice'>€"+totalPrice+"</td></tr>";
+    $("#reviewTable").append(content);
   });
 
   /** Button to continue the order process
