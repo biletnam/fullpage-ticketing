@@ -42,6 +42,9 @@ $(document).ready(function() {
 
   /** Button to continue the order process
   */
+  $(".scrollDown").click(function() {
+    $.fn.fullpage.moveSectionDown();
+  });
   $(".backbutton").click(function() {
     $.fn.fullpage.moveSlideLeft();
   });

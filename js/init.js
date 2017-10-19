@@ -1,8 +1,7 @@
 $(document).ready(function() {
   $('#fullpage').fullpage({
     //Navigation
-    anchors:['home', 'order'],
-    lockAnchors: false,
+    lockAnchors: true,
     navigation: false,
 
     //Scrolling

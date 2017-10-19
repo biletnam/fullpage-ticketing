@@ -32,7 +32,7 @@ while($row = $db->query($sql)->fetch_assoc()){
 
       <div class="section">
         moin moin auf der silvester seite
-        <a href="#order/customer">tickets anfordern</a>
+        <a href="#" class="scrollDown">tickets anfordern</a>
       </div>
 
     	<div class="section">
