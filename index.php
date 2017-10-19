@@ -65,7 +65,7 @@ while($row = $db->query($sql)->fetch_assoc()){
               <table id="reviewTable">
               </table>
               <button tabindex="-1" type="button" class="small left backbutton">Zurück</button>
-              <input type="submit" class="small right" value="Abschicken">
+              <input type="submit" class="small right" value="Abschicken" />
             </div>
           </div>
 
