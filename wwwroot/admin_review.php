@@ -10,7 +10,7 @@
       if($_SERVER['REQUEST_METHOD'] == 'POST') {
         highlight_string("<?php\n\$_POST =\n" . var_export($_POST, true) . ";\n?>");
 
-        if(count($_POST['tickets']['owner']) > 0) {
+        if($_POST['firstname'] !=  "" && $_POST['surname'] != "" && $_POST['email'] != "" && $_POST['mobile'] != "" && count($_POST['tickets']['owner']) > 0) {
           $firstname = $db->real_escape_string(htmlspecialchars($_POST['firstname']));
           $surname = $db->real_escape_string(htmlspecialchars($_POST['surname']));
           $email = $db->real_escape_string(htmlspecialchars($_POST['email']));
@@ -38,7 +38,7 @@
           }
 
         } else {
-          die("ERROR invalid request: no tickets selected");
+          die("ERROR invalid request");
         }
 
 
