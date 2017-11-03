@@ -24,21 +24,37 @@
             $sql = $sql.($i>0?" OR":"")." carted.uid = '".$db->real_escape_string(htmlspecialchars($_POST['tickets']['uids'][$i]))."'";
           }
 
-          //DEBUG pls remove
-          echo $sql."<br>";
-
           if(!$result = $db->query($sql)){
             die('There was an error selecting the tickets [' . $db->error . ']');
           }
 
           if($result->num_rows == count($_POST['tickets']['owner'])) {
+              echo "valid";
 
+              //TODO: check if order for this id is already placed (because of reload)
+
+              //create new order (add a row to order with name etc) --> note id
+              $ordsql = "INSERT INTO orders (firstname, surname, email, mobile, date_placed, admin_reviewed) VALUES ('".$firstname."', '".$surname."', '".$email."', '".$mobile."', NOW(), 0)";
+
+              if(!$ordresult = $db->query($ordsql)){
+                die('There was an error creating the order [' . $db->error . ']'); //latest change here
+              }
+
+              while($row =  $result->fetch_assoc()){
+
+                  //debug only pls remove
+                  echo "<br>".$row['uid'].": ".$row['stage']." -> ".$row['price'];
+
+
+
+                  //add tickets to ticket list with order id as order id
+              }
           } else {
             die("ERROR invalid tickets: entweder sind deine tickets abgelaufen oder wurden manipuliert");
           }
 
         } else {
-          die("ERROR invalid request");
+          die("ERROR missing data");
         }
 
 
