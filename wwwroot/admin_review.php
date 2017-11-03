@@ -7,6 +7,7 @@
   </head>
   <body>
     <?php
+
       if($_SERVER['REQUEST_METHOD'] == 'POST') {
         highlight_string("<?php\n\$_POST =\n" . var_export($_POST, true) . ";\n?>");
 
@@ -34,20 +35,34 @@
               //TODO: check if order for this id is already placed (because of reload)
 
               //create new order (add a row to order with name etc) --> note id
-              $ordsql = "INSERT INTO orders (firstname, surname, email, mobile, date_placed, admin_reviewed) VALUES ('".$firstname."', '".$surname."', '".$email."', '".$mobile."', NOW(), 0)";
+              $ordsql = "INSERT INTO orders (orders.firstname, orders.surname, orders.email, orders.mobile, orders.date_placed, orders.admin_reviewed) VALUES ('".$firstname."', '".$surname."', '".$email."', '".$mobile."', NOW(), 0)";
 
               if(!$ordresult = $db->query($ordsql)){
                 die('There was an error creating the order [' . $db->error . ']'); //latest change here
               }
 
+              $orderid = $db->insert_id;
+
+              //create tickets
               while($row =  $result->fetch_assoc()){
 
-                  //debug only pls remove
-                  echo "<br>".$row['uid'].": ".$row['stage']." -> ".$row['price'];
+                $ticksql = "INSERT INTO tickets (tickets.uid, tickets.order, tickets.name, tickets.stage, tickets.price, tickets.approved) VALUES ('".$row['uid']."', '".$orderid."', '".$_POST['tickets']['owner'][array_search($row['uid'], $_POST['tickets']['uids'])]."', ".$row['stage'].", ".$row['price'].", 0)";
 
+                if(!$tickresult = $db->query($ticksql)){
+                  die('There was an error creating the order [' . $db->error . ']'); //latest change here
+                }
 
+              }
 
-                  //add tickets to ticket list with order id as order id
+              //remove tickets from carted (because they are dispatched now)
+              $sql = "DELETE FROM carted WHERE";
+
+              for($i = 0; $i<$tickets; $i++) {
+                $sql = $sql.($i>0?" OR":"")." carted.uid = '".$db->real_escape_string(htmlspecialchars($_POST['tickets']['uids'][$i]))."'";
+              }
+
+              if(!$result = $db->query($sql)){
+                die('There was an error removing the tickets from carted [' . $db->error . ']');
               }
           } else {
             die("ERROR invalid tickets: entweder sind deine tickets abgelaufen oder wurden manipuliert");
@@ -56,25 +71,9 @@
         } else {
           die("ERROR missing data");
         }
-
-
       } else {
         die("ERROR WRONG REQUEST_METHOD");
       }
      ?>
-
-     <br><br><br>
-
-     //check if uids are valid (if they're in carted they're valid) $result->num_rows
-
-     //add record for new order
-     //       $db->insert_id
-
-
-     /*
-     delete from rooms
-     where room_initiating_user_id in (select user_id from users where user_connected = 0)
-  and room_target_user_id in (select user_id from users where user_connected = 0)
-     */
   </body>
 </html>
