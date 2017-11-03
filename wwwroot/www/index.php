@@ -1,5 +1,5 @@
 <?php
-include "db.php";
+include "../db.php";
 
 $sql = "SELECT carted.id, carted.stage FROM carted WHERE (NOW() - INTERVAL 30 MINUTE) > carted.time_carted";
 
