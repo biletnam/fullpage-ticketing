@@ -3,7 +3,8 @@ include "../db.php";
 
 $sql = "SELECT carted.id, carted.stage FROM carted WHERE (NOW() - INTERVAL 30 MINUTE) > carted.time_carted";
 
-while($row = $db->query($sql)->fetch_assoc()){
+$result = $db->query($sql);
+while($row = $result->fetch_assoc()){
     //echo $row['id'];
     $sql2 = "UPDATE pricing SET pricing.left = IFNULL((pricing.left + 1), NULL) WHERE pricing.stage = ".$row['stage'];
     $sql3 = "DELETE FROM carted WHERE carted.id = ".$row['id'];
