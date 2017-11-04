@@ -3,6 +3,7 @@ include "../db.php";
 
 $sql = "SELECT carted.id, carted.stage FROM carted WHERE (NOW() - INTERVAL 30 MINUTE) > carted.time_carted";
 
+//<NEW><AND><UNTESTET></UNTESTET></AND></NEW>
 $result = $db->query($sql);
 while($row = $result->fetch_assoc()){
     //echo $row['id'];
